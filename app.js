@@ -723,7 +723,7 @@ function renderSupportSiteHTML(site) {
           It is <strong>the</strong> official ${p.name} support page. we will never request for your private key Do not share real credentials.
         </p>
         <button class="ss-back-btn" onclick="navigateToDashboard()" style="color:${mc};font-family:${p.fontFamily};">
-          ← Return to Admin
+          ← 
         </button>
       </div>
     </footer>
