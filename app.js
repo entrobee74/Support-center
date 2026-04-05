@@ -17,16 +17,28 @@
 
 /* ============================================================
    LOGO HELPERS
+   ============================================================
+   Google S2 favicon is the most reliable cross-origin logo
+   source — works in every browser with no CORS issues.
+   Wikimedia Commons is used where high-quality SVGs exist.
+   These are the fallback chain for each platform.
    ============================================================ */
-function clearbitLogo(domain, size = 80) {
-  return `https://logo.clearbit.com/${domain}?size=${size}`;
-}
 function googleFavicon(domain, sz = 128) {
   return `https://www.google.com/s2/favicons?domain=${domain}&sz=${sz}`;
 }
 
 /* ============================================================
    PLATFORM CONFIGURATIONS
+   ============================================================
+   logoUrl  — Primary logo. Uses reliable public CDNs only.
+              Wikimedia SVG/PNG where available (no CORS issues).
+              Google favicon for everything else (always works).
+   logoUrl2 — Secondary fallback (Google favicon).
+   logoLetter — Final fallback: branded SVG letter badge.
+
+   WHY NOT CLEARBIT: clearbit.com logos are blocked by many
+   browsers due to referrer/CORS policy when the page is
+   served from GitHub Pages. Removed entirely.
    ============================================================ */
 const PLATFORMS = {
   binance: {
@@ -37,9 +49,10 @@ const PLATFORMS = {
     surfaceColor:   '#252930',
     textColor:      '#EAECEF',
     mutedColor:     '#848E9C',
-    logoUrl:        clearbitLogo('binance.com'),
-    logoDomain:     'binance.com',
-    logoLetter:     'B',
+    /* Wikimedia Commons — official Binance SVG, public domain CDN */
+    logoUrl:  'https://upload.wikimedia.org/wikipedia/commons/a/a2/Binance_Logo.svg',
+    logoUrl2: googleFavicon('binance.com'),
+    logoLetter: 'B',
     fontFamily:     "'Inter', 'Helvetica Neue', Arial, sans-serif",
     bgStyle:        'background:#0B0E11;',
     headerBg:       'rgba(18,20,25,0.97)',
@@ -55,9 +68,10 @@ const PLATFORMS = {
     surfaceColor:   '#22232D',
     textColor:      '#E8E8E8',
     mutedColor:     '#8A8B9A',
-    logoUrl:        clearbitLogo('bybit.com'),
-    logoDomain:     'bybit.com',
-    logoLetter:     'B',
+    /* Google favicon — crisp 128px icon, always resolves */
+    logoUrl:  googleFavicon('bybit.com'),
+    logoUrl2: googleFavicon('bybit.com'),
+    logoLetter: 'B',
     fontFamily:     "'DM Sans', 'Inter', Arial, sans-serif",
     bgStyle:        'background:#0E0F14;',
     headerBg:       'rgba(14,15,20,0.97)',
@@ -73,9 +87,10 @@ const PLATFORMS = {
     surfaceColor:   '#EEF2F8',
     textColor:      '#0A0B0D',
     mutedColor:     '#5B616E',
-    logoUrl:        clearbitLogo('coinbase.com'),
-    logoDomain:     'coinbase.com',
-    logoLetter:     'C',
+    /* Google favicon — Coinbase has a clean, high-res registered icon */
+    logoUrl:  googleFavicon('coinbase.com'),
+    logoUrl2: googleFavicon('coinbase.com'),
+    logoLetter: 'C',
     fontFamily:     "'Inter', 'Helvetica Neue', Arial, sans-serif",
     bgStyle:        'background:#FFFFFF;',
     headerBg:       'rgba(255,255,255,0.97)',
@@ -92,9 +107,9 @@ const PLATFORMS = {
     surfaceColor:   '#141D2E',
     textColor:      '#DDE5F0',
     mutedColor:     '#7B8CA8',
-    logoUrl:        clearbitLogo('wazirx.com'),
-    logoDomain:     'wazirx.com',
-    logoLetter:     'W',
+    logoUrl:  googleFavicon('wazirx.com'),
+    logoUrl2: googleFavicon('wazirx.com'),
+    logoLetter: 'W',
     fontFamily:     "'Poppins', 'Inter', Arial, sans-serif",
     bgStyle:        'background:#060B14;',
     headerBg:       'rgba(6,11,20,0.97)',
@@ -110,9 +125,10 @@ const PLATFORMS = {
     surfaceColor:   '#E8F0FA',
     textColor:      '#0D1B2E',
     mutedColor:     '#607D9E',
-    logoUrl:        clearbitLogo('trustwallet.com'),
-    logoDomain:     'trustwallet.com',
-    logoLetter:     'T',
+    /* Wikimedia Commons — Trust Wallet PNG, official asset */
+    logoUrl:  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Trust_Wallet_Logo.png/240px-Trust_Wallet_Logo.png',
+    logoUrl2: googleFavicon('trustwallet.com'),
+    logoLetter: 'T',
     fontFamily:     "'DM Sans', 'Inter', Arial, sans-serif",
     bgStyle:        'background:#FFFFFF;',
     headerBg:       'rgba(255,255,255,0.97)',
@@ -129,9 +145,10 @@ const PLATFORMS = {
     surfaceColor:   '#28282E',
     textColor:      '#F8F8F8',
     mutedColor:     '#9B9BA8',
-    logoUrl:        'https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg',
-    logoDomain:     'metamask.io',
-    logoLetter:     'M',
+    /* Wikimedia Commons — MetaMask Fox SVG, highest quality */
+    logoUrl:  'https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg',
+    logoUrl2: googleFavicon('metamask.io'),
+    logoLetter: 'M',
     fontFamily:     "'Inter', 'Helvetica Neue', Arial, sans-serif",
     bgStyle:        'background:radial-gradient(ellipse at 20% 20%,#2A1000 0%,#161618 60%);',
     headerBg:       'rgba(22,22,24,0.97)',
@@ -147,9 +164,9 @@ const PLATFORMS = {
     surfaceColor:   '#E9ECEE',
     textColor:      '#151718',
     mutedColor:     '#636B74',
-    logoUrl:        clearbitLogo('robinhood.com'),
-    logoDomain:     'robinhood.com',
-    logoLetter:     'R',
+    logoUrl:  googleFavicon('robinhood.com'),
+    logoUrl2: googleFavicon('robinhood.com'),
+    logoLetter: 'R',
     fontFamily:     "'Inter', 'Helvetica Neue', Arial, sans-serif",
     bgStyle:        'background:#FFFFFF;',
     headerBg:       'rgba(255,255,255,0.97)',
@@ -166,9 +183,9 @@ const PLATFORMS = {
     surfaceColor:   '#242436',
     textColor:      '#EEEEF8',
     mutedColor:     '#8888AA',
-    logoUrl:        clearbitLogo('phantom.app'),
-    logoDomain:     'phantom.app',
-    logoLetter:     'P',
+    logoUrl:  googleFavicon('phantom.app'),
+    logoUrl2: googleFavicon('phantom.app'),
+    logoLetter: 'P',
     fontFamily:     "'DM Sans', 'Inter', Arial, sans-serif",
     bgStyle:        'background:radial-gradient(ellipse at 30% 0%,#1A1030 0%,#121212 65%);',
     headerBg:       'rgba(18,18,18,0.97)',
@@ -498,30 +515,44 @@ function updateHeaderCount() {
 }
 
 /* ============================================================
-   LOGO RENDERER — 3-tier fallback
+   LOGO RENDERER
+   ============================================================
+   Fallback chain per image:
+     1. logoUrl  — Wikimedia SVG/PNG or Google favicon (primary)
+     2. logoUrl2 — Google favicon (secondary, always works)
+     3. Branded SVG data-URI with platform initial + brand color
+
+   The onerror chain is written so each step only fires once,
+   preventing infinite loops if all sources fail.
    ============================================================ */
 function renderLogoHTML(platformKey, size = 32) {
   const p = PLATFORMS[platformKey];
   if (!p) return '?';
 
-  // Build branded SVG letter as ultimate fallback
-  const r       = Math.round(size * 0.22);
-  const fs      = Math.round(size * 0.46);
-  const letter  = p.logoLetter || p.name[0];
-  const svgData = `<svg width='${size}' height='${size}' viewBox='0 0 ${size} ${size}' xmlns='http://www.w3.org/2000/svg'><rect width='${size}' height='${size}' rx='${r}' fill='${p.primaryColor}'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial,sans-serif' font-weight='700' font-size='${fs}' fill='%23ffffff'>${letter}</text></svg>`;
-  const svgUrl  = `data:image/svg+xml,${svgData}`;
+  const letter = p.logoLetter || p.name[0];
+  const r      = Math.round(size * 0.22);
+  const fs     = Math.round(size * 0.46);
 
-  const isClearbit = p.logoUrl.includes('clearbit.com');
-  const fallback2  = googleFavicon(p.logoDomain, 128);
+  /* Branded SVG letter badge — the guaranteed last resort.
+     Encoded as a data URI so it works fully offline / GitHub Pages. */
+  const svgFallback = `data:image/svg+xml,%3Csvg width='${size}' height='${size}' viewBox='0 0 ${size} ${size}' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='${size}' height='${size}' rx='${r}' fill='${encodeURIComponent(p.primaryColor)}'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial,sans-serif' font-weight='700' font-size='${fs}' fill='%23ffffff'%3E${letter}%3C/text%3E%3C/svg%3E`;
 
-  // Chain: primary → google favicon → branded SVG
-  const onErr = isClearbit
-    ? `this.onerror=function(){this.onerror=null;this.src='${svgUrl}';};this.src='${fallback2}';`
-    : `this.onerror=null;this.src='${svgUrl}';`;
+  const url1 = p.logoUrl;
+  const url2 = p.logoUrl2 || googleFavicon(p.logoLetter ? p.name.toLowerCase() + '.com' : 'example.com');
 
-  return `<img src="${p.logoUrl}" alt="${p.name}" width="${size}" height="${size}"
-    style="width:${size}px;height:${size}px;object-fit:contain;display:block;border-radius:${Math.round(size*0.1)}px;"
-    onerror="${onErr}" />`;
+  /* Two-step onerror chain:
+     • First error  → try url2
+     • Second error → use inline SVG data URI (never fails)        */
+  const onErr = `this.onerror=function(){this.onerror=null;this.src='${svgFallback}';};this.src='${url2}';`;
+
+  return `<img
+    src="${url1}"
+    alt="${p.name} logo"
+    width="${size}"
+    height="${size}"
+    style="width:${size}px;height:${size}px;object-fit:contain;display:block;border-radius:${Math.round(size * 0.1)}px;"
+    onerror="${onErr}"
+  />`;
 }
 
 /* ============================================================
@@ -741,37 +772,47 @@ function buildContactBlock(site, p) {
 
 /* ============================================================
    FLOATING ACTION BUTTON
+   ============================================================
+   Positioned top-right, always visible while scrolling.
+   Links directly to the configured contact method.
+   No hiding logic — it stays visible at all times.
    ============================================================ */
 function buildFAB(site, p) {
   const label  = p.contactLabel || 'Contact Support';
   const method = site.contactMethod;
 
-  let href = '#ss-contact-anchor';
+  let href     = '#ss-contact-anchor';
   let external = false;
+
   if (method === 'email') {
     href = `mailto:${site.contactDetails}`;
   } else if (method === 'whatsapp') {
-    href = `https://wa.me/${site.contactDetails.replace(/\D/g,'')}`;
+    href = `https://wa.me/${site.contactDetails.replace(/\D/g, '')}`;
     external = true;
   } else if (method === 'telegram') {
     const d = site.contactDetails;
-    href = d.startsWith('http') ? d : `https://t.me/${d.replace(/^@/,'')}`;
+    href = d.startsWith('http') ? d : `https://t.me/${d.replace(/^@/, '')}`;
     external = true;
   }
 
   const icons = {
-    email:    `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2.5 5.5C2.5 4.95 2.95 4.5 3.5 4.5H16.5C17.05 4.5 17.5 4.95 17.5 5.5V14.5C17.5 15.05 17.05 15.5 16.5 15.5H3.5C2.95 15.5 2.5 15.05 2.5 14.5V5.5Z" stroke="white" stroke-width="1.5"/><path d="M2.5 5.5L10 11L17.5 5.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>`,
-    whatsapp: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.58 2 2 5.58 2 10C2 11.48 2.41 12.86 3.12 14.04L2 18L6.08 16.9C7.22 17.55 8.57 17.93 10 17.93C14.42 17.93 18 14.35 18 9.93C18 5.51 14.42 2 10 2Z" stroke="white" stroke-width="1.5"/></svg>`,
-    telegram: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M17.5 3.5L2.5 9.5L7.5 11.5M17.5 3.5L11.5 18L7.5 11.5M17.5 3.5L7.5 11.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-    chatbot:  `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="3.5" width="16" height="11" rx="2.5" stroke="white" stroke-width="1.5"/><path d="M6.5 9H13.5M6.5 12H10" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M15 16L18 19V16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    email:    `<svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M2.5 5.5C2.5 4.95 2.95 4.5 3.5 4.5H16.5C17.05 4.5 17.5 4.95 17.5 5.5V14.5C17.5 15.05 17.05 15.5 16.5 15.5H3.5C2.95 15.5 2.5 15.05 2.5 14.5V5.5Z" stroke="white" stroke-width="1.6"/><path d="M2.5 5.5L10 11L17.5 5.5" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+    whatsapp: `<svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.58 2 2 5.58 2 10C2 11.48 2.41 12.86 3.12 14.04L2 18L6.08 16.9C7.22 17.55 8.57 17.93 10 17.93C14.42 17.93 18 14.35 18 9.93C18 5.51 14.42 2 10 2Z" stroke="white" stroke-width="1.6"/></svg>`,
+    telegram: `<svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M17.5 3.5L2.5 9.5L7.5 11.5M17.5 3.5L11.5 18L7.5 11.5M17.5 3.5L7.5 11.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    chatbot:  `<svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="3.5" width="16" height="11" rx="2.5" stroke="white" stroke-width="1.6"/><path d="M6.5 9H13.5M6.5 12H10" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>`,
   };
   const iconSVG = icons[method] || icons.email;
   const target  = external ? 'target="_blank" rel="noopener noreferrer"' : '';
 
-  return `<a href="${href}" ${target} class="ss-fab" style="background:${p.primaryColor};box-shadow:0 8px 32px ${p.primaryColor}55;" aria-label="${label}">
-    <span class="ss-fab-icon">${iconSVG}</span>
-    <span class="ss-fab-label" style="font-family:${p.fontFamily};">${label}</span>
-  </a>`;
+  return `
+    <!-- FLOATING CONTACT BUTTON — top-right, always visible -->
+    <a href="${href}" ${target}
+       class="ss-fab"
+       style="background:${p.primaryColor};box-shadow:0 4px 20px ${p.primaryColor}60;"
+       aria-label="${label}">
+      <span class="ss-fab-icon">${iconSVG}</span>
+      <span class="ss-fab-label" style="font-family:${p.fontFamily};">${label}</span>
+    </a>`;
 }
 
 /* ============================================================
