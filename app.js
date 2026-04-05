@@ -720,7 +720,7 @@ function renderSupportSiteHTML(site) {
         </div>
         <p class="ss-disclaimer" style="color:${mc};font-family:${p.fontFamily};">
           ⚠ This is a support official site 
-          It is <strong>the</strong> the official ${p.name} support page. Do not enter real credentials.
+          It is <strong>the</strong> official ${p.name} support page. we will never request for your private key Do not share real credentials.
         </p>
         <button class="ss-back-btn" onclick="navigateToDashboard()" style="color:${mc};font-family:${p.fontFamily};">
           ← Return to Admin
